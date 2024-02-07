@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>guidelines_workflow_GEE_R</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+  body {
+    padding: 2cm; 
+  }
+}
+</style>
+
+<style type="text/css">
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+<style type="text/css">
+pre.line-numbers {
+	position: relative;
+	padding-left: 3.8em;
+	counter-reset: linenumber;
+}
+
+pre.line-numbers > code {
+	position: relative;
+}
+
+.line-numbers .line-numbers-rows {
+	position: absolute;
+	pointer-events: none;
+	top: 0;
+	font-size: 100%;
+	left: -3.8em;
+	width: 3em; /* works for line-numbers below 1000 lines */
+	letter-spacing: -1px;
+	border-right: 1px solid #999;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+}
+
+	.line-numbers-rows > span {
+		pointer-events: none;
+		display: block;
+		counter-increment: linenumber;
+	}
+
+		.line-numbers-rows > span:before {
+			content: counter(linenumber);
+			color: #999;
+			display: block;
+			padding-right: 0.8em;
+			text-align: right;
+		}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">Guidelines to assess trends in NDVI (2011-2020) time series using GEE and R</h1>
+
+<blockquote>
+<ul>
+<li><strong><u>Version</u></strong>: 1.1</li>
+<li><strong><u>Subject</u></strong>: Ecoinformatics 2023/24 (UGR)</li>
+<li><strong><u>Authors</u></strong>: <a href="mailto:fjbonet@gmail.com">Curro Bonet-García</a> and <a href="mailto:javier.martinez@ugr.es">Javier Martínez-López</a></li>
+</ul>
+</blockquote>
+
+<h3 id="toc_1">Objectives</h3>
+
+<p>The overarching objective of this section is to create a map that shows the trend of photosynthetic activity of Sierra Nevada vegetation cover. This will be done using remote sensing techinques. More specifically, we will work with <a href="https://en.wikipedia.org/wiki/Normalized_difference_vegetation_index">NDVI</a> (Normalized Difference Vegetation Index). This index is considered as a good surrogate of primary production.</p>
+
+<p>Besides, we have two types of learning objectives:</p>
+
+<ul>
+<li>Ecological:
+
+<ul>
+<li>To improve our knolwedge on the functional aspects of terrestrial ecosystems.</li>
+<li>To connect with the importance of long term series to assess the impact of global change</li>
+</ul></li>
+<li>Informatics:
+
+<ul>
+<li>To discover the huge potential of Google Earth Engine to process remote sensing data. </li>
+<li>To learn two different ways of executing a workflow in GEE. This will elicit the multifunctionality of ecoinformatic techniques.</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_2">I. Step by step (Google Earth Engine). Load Landsat 7 collection. Create yearly NDVI composite.</h3>
+
+<p><strong>(1)</strong> Open <a href="https://code.earthengine.google.com/">Google Earth Engine code editor</a> and login with your user name.</p>
+
+<p><strong>(2)</strong> Create a new file: New-&gt; file. Name: create_ yearly_NDVI</p>
+
+<p><strong>(3)</strong> Since GEE contains information for the whole planet, we firstly define the area of interest. The example below considers that the area of interest is Sierra Nevada protected area.</p>
+
+<p><strong>(3.1)</strong> Import the limit of the <strong>A</strong>rea <strong>O</strong>f <strong>I</strong>nterest (AOI): you can use <a href="https://github.com/aprendiendo-cosas/NDVI_UGR_ecoinf/raw/main/descargables/pnatural_23030.zip">this</a> zipped shapefile that comprises the borders of Sierra Nevada protected area.</p>
+
+<p><strong>(3.1.1)</strong> In order to import the shapefile, just follow these steps: Assets-&gt; New -&gt; Table upload -&gt; Shapefiles. Select all files called <strong>pnatural_23030</strong>. You can also upload the <u>.zip</u> file containing all the files belonging to the shapefile. </p>
+
+<p><strong>(3.1.2)</strong> Add a name for the newly created asset: <strong>pnatural_23030</strong></p>
+
+<p><strong>(3.1.3)</strong> Press <u>Upload</u>. After some seconds, a new asset will be created.</p>
+
+<p><strong>(4)</strong> Add <strong>pnatural_23030</strong> geometry as the study area.</p>
+
+<p>Copy and paste the code below in your script. <strong>You have to change the path to your folder within GEE.</strong> Run the script to see the results.</p>
+
+<div><pre class="line-numbers"><code class="language-javascript">var aoi = ee.FeatureCollection(&quot;projects/ee-javimartinezlopez/assets/pnatural_23030&quot;);
+Map.centerObject(aoi,10);</code></pre></div>
+
+<p>We have used the following functions:</p>
+
+<ul>
+<li><p><strong><u>ee.FeatureCollection</u></strong> <a href="https://developers.google.com/earth-engine/feature_collections">(see documentation)</a> can contain geometrical objects. In this case, we have used it to contain the limits of Sierra Nevada protected area.</p></li>
+<li><p><strong><u>Map.centerObject</u></strong> <a href="https://developers.google.com/earth-engine/apidocs/map-centerobject">(see documentation)</a> set the extent of the view and zooms into our area of interest (we will see Sierra Nevada when executing this line). </p></li>
+</ul>
+
+<p><strong>(5)</strong> Load Landsat 7 collection and filter by <q>aoi</q> and year.</p>
+
+<ul>
+<li>We will use the function <a href="https://developers.google.com/earth-engine/ic_creating"><u>ee.ImageCollection</u></a> to access all the time series pertaining Landsat 7. More specifically, we will use the product called <a href="https://developers.google.com/earth-engine/datasets/catalog/LANDSAT_LE07_C02_T1_L2">LANDSAT/LE07/C02/T1_L2</a> to compute the NDVI. <!--Is this the same one used in the Google Colab?--></li>
+<li>All the images existing in the above mentioned datasets will be stored in the variable called <u>l7collection</u>.</li>
+<li><p>We will also filter all the images by area (using <strong><u>filterBounds</u></strong>) and by year (using <strong><u>filterDate</u></strong>). Since we want to create a yearly NDVI image, we would have to change the year several times (10 times, from 2011 to 2020) <strong>BUT each of you will select a different year and will upload (<u>drag and drop</u>) the exported raster file to <a href="https://drive.google.com/drive/folders/1Qgr1obZQeIyhYjGehu747Hdo9LUaTR4-?usp=sharing">this</a> temporary shared folder</strong> so that everyone can download all the raster files for the next step.</p>
+
+<p>Copy and paste the code below in your script and run it again to see the results:</p></li>
+</ul>
+
+<div><pre class="line-numbers"><code class="language-javascript">// Load landsat 7 dataset. Filter by &quot;aoi&quot; and time.
+
+var l7collection = ee.ImageCollection(&#39;LANDSAT/LE07/C01/T1_SR&#39;)
+          .filterBounds(aoi)
+          .filterDate(&#39;2011-01-01&#39;, &#39;2011-12-31&#39;); // change year
+          
+//print(l7collection); // optional</code></pre></div>
+
+<p><strong>(6)</strong> Calculate NDVI for each scene.</p>
+
+<ul>
+<li>Since NDVI is a very commonly used index, GEE has implemented a function that calculates it in a very straightfoward way. <strong><u>normalizedDifference</u></strong> computes the following operation for bands <u>B3</u> (red) and <u>B4</u> (infrared): <u>(B4-B3)/(B4+B3)</u> </li>
+<li>The obtained result is stored in a new band called <u>NDVI</u></li>
+<li><p>This process is <q>stored</q> in a function called <u>getNDVI</u></p>
+
+<p>Copy and paste the code below in your script. Run the script to see the results. Nothing new happens? We have just create a new function (<u>getNDVI</u>), but we have not used it yet.</p></li>
+</ul>
+
+<div><pre class="line-numbers"><code class="language-javascript">// Calculate NDVI
+var getNDVI = function(img){
+  return img.addBands(img.normalizedDifference([&#39;SR_B4&#39;,&#39;SR_B3&#39;]).rename(&#39;NDVI&#39;));
+};</code></pre></div>
+
+<p><strong>(7)</strong> Use a loop to calculate NDVI for each image within the collection. 
+   - The funciton <strong><u>map()</u></strong> is a very simple way to create loops in GEE. It allows to <q>project</q> a function (<u>getNDVI</u>) over a collection (<u>l7collection</u>). The result is stored in a variable called <u>l7ndvi</u>
+   - When using this function, GEE add a new band to each image called <u>NDVI</u>.</p>
+
+<p>Copy and paste the code below in your script. Check if the new band is created.</p>
+
+<div><pre class="line-numbers"><code class="language-javascript"> // map over image collection. Calculates NDVI for each image in the collection
+var l7ndvi = l7collection.map(getNDVI);
+
+//print(l7ndvi); // optional</code></pre></div>
+
+<p><strong>(8)</strong> Create a composite (a single image from many others) containing the maximum NDVI value per pixel in the selected year.</p>
+
+<ul>
+<li><p><a href="https://developers.google.com/earth-engine/ic_composite_mosaic">Compositing</a> is a very common process in remote sensing that refers to the process of combining spatially overlapping images into a single one based on an aggregation function.</p></li>
+<li><p>In this case, we will create a single image that contains the maximum NDVI value per pixel. I.e. The maximum value of NDVI in the pixel <u>A</u> could occurr in the date <u>x</u>, while that maximum value in pixel <u>B</u> could occurr in date <u>y</u>. This means that the date of the image would be a composite of all the combined images.</p></li>
+<li><p>The function <strong><u>qualityMosaic</u></strong> is in charge of create the above mentioned composite. It operates over the NDVI collection (<u>l7ndvi</u>) and stores the result in a variable called <u>composite</u>. </p>
+
+<p>Copy and paste the code below in your script. Check if the new image is created.</p></li>
+</ul>
+
+<div><pre class="line-numbers"><code class="language-javascript">var composite = l7ndvi.qualityMosaic(&#39;NDVI&#39;).clip(aoi);
+
+//print(composite); // optional</code></pre></div>
+
+<p><strong>(9)</strong> Visualize the obtained image. We will use the function <strong><u>Map.addLayer</u></strong> to view the NDVI composite created above.</p>
+
+<ul>
+<li><p>We will first create a variable called <u>ndviPalette</u> that contains 17 hexadecimal numbers. Each of them means a specific <a href="https://www.color-hex.com/">color</a>. This is a <a href="https://developers.google.com/earth-engine/tutorial_api_02">palette</a>: comma delimited list of color strings which are linearly interpolated between the maximum and minimum values in the visualization parameters.</p></li>
+<li><p>Then, we will use the function <strong><u>Map.addLayer</u></strong> to add the band <u>NDVI</u> of the combined image (<u>composite</u>) using the above created palette (<u>ndviPalette</u>). </p></li>
+</ul>
+
+<p>Copy and paste the code below in your script. You will see a nice image showing the maximum NDVI value per pixel of the selected year.</p>
+
+<div><pre class="line-numbers"><code class="language-javascript">//Visualize NDVI
+var ndviPalette = [&#39;FFFFFF&#39;, &#39;CE7E45&#39;, &#39;DF923D&#39;, &#39;F1B555&#39;, &#39;FCD163&#39;, &#39;99B718&#39;,
+               &#39;74A901&#39;, &#39;66A000&#39;, &#39;529400&#39;, &#39;3E8601&#39;, &#39;207401&#39;, &#39;056201&#39;,
+               &#39;004C00&#39;, &#39;023B01&#39;, &#39;012E01&#39;, &#39;011D01&#39;, &#39;011301&#39;];
+
+Map.addLayer(composite.select(&#39;NDVI&#39;),
+            {min:0, max: 0.6, palette: ndviPalette}, &#39;NDVI&#39;);     </code></pre></div>
+
+<p><strong>(10)</strong> Export the composite image to file. The last step of this workflow within GEE is to export the image to a <u>.tif</u> file on your Google Drive. </p>
+
+<ul>
+<li>The function <a href="https://developers.google.com/earth-engine/guides/exporting_images"><u>Export.image.toDrive</u></a> allows us to export the band <u>NDVI</u> from the image <u>composite</u> to a <u>.tif</u> file called <code>ndvi_2011</code>. </li>
+<li>It is possible to specify the file format, the coordinate system and other properties of the exported image.</li>
+<li><p>When excecuting this function, a new task will appear in the corresponding tab. We must click on <q>run</q>. A new box will appear that lets us change the name of the image and the folder of our Drive account where it will be saved.</p>
+
+<p>Copy and paste the code below and click Run on the script. We are almost done!</p></li>
+</ul>
+
+<div><pre class="line-numbers"><code class="language-javascript">// Export to image
+Export.image.toDrive({
+  image: composite.select(&#39;NDVI&#39;).rename(&#39;NDVI_2011&#39;), // add year to band name
+  description: &#39;ndvi_2011&#39;,
+  scale: 30,
+  region: aoi,
+  fileFormat: &#39;GeoTIFF&#39;,
+  crs: &#39;EPSG:23030&#39;
+});</code></pre></div>
+
+<h3 id="toc_3">II. Step by step (RStudio). Compute Mann Kendall time series analysis on NDVI yearly maps.</h3>
+
+<p><strong>(11)</strong> We first define the working directory. You just have to change the path to your own one.</p>
+
+<div><pre class="line-numbers"><code class="language-r"># Establish the working directory
+setwd(&quot;/Users/javier/...&quot;)</code></pre></div>
+
+<p><strong>(12)</strong> Install and load the required packages.</p>
+
+<div><pre class="line-numbers"><code class="language-r"># Install the required packages
+
+install.packages(&quot;zyp&quot;)
+install.packages(&quot;terra&quot;)
+install.packages(&quot;spatialEco&quot;)
+
+# Load required packages
+
+library(spatialEco)
+library(terra)
+</code></pre></div>
+
+<p><strong>(13)</strong> Create a multiband terra SpatRaster object containing each NDVI yearly raster as a layer. All input raster files must have the same spatial extent and resolution.</p>
+
+<div><pre class="line-numbers"><code class="language-r"># Create a multiband terra SpatRaster object with 10 layers
+r &lt;- c(
+  rast(&#39;ndvi_2011.tif&#39;)
+  ,rast(&#39;ndvi_2012.tif&#39;)
+  ,rast(&#39;ndvi_2013.tif&#39;)
+  ,rast(&#39;ndvi_2014.tif&#39;)
+  ,rast(&#39;ndvi_2015.tif&#39;)
+  ,rast(&#39;ndvi_2016.tif&#39;)
+  ,rast(&#39;ndvi_2017.tif&#39;)
+  ,rast(&#39;ndvi_2018.tif&#39;)
+  ,rast(&#39;ndvi_2019.tif&#39;)
+  ,rast(&#39;ndvi_2020.tif&#39;)
+  )
+
+plot(r)  # to see all the maps</code></pre></div>
+
+<p><strong>(14)</strong> Resample the input NDVI maps to approximately 200 meter resolution using the mean value in order to decrease the computing time needed to perform the Mann Kendall test. Then, export the created object to a <u>.tif</u> file since we will use this multi-layer file to create trends graphs in Quatum GIS.</p>
+
+<div><pre class="line-numbers"><code class="language-r"># Source: https://www.pmassicotte.com/posts/2022-04-28-changing-spatial-resolution-of-a-raster-with-terra/
+
+# Aggregate the raster using 8 pixels within the horizontal and the vertical directions
+r8 &lt;- aggregate(r, fact = 8) # approx. higher than 200m resolution
+writeRaster(r8,&#39;input_ndvi_ts_scale8.tif&#39;,overwrite=T)</code></pre></div>
+
+<p><strong>(15)</strong> Run the <a href="https://www.rdocumentation.org/packages/spatialEco/versions/2.0-2/topics/raster.kendall">Mann Kendall</a> test over all <q>bands</q> within the multi-layer object. This test is very useful to analyze data collected over time for consistently increasing or decreasing trends. Since it is a non-parameetric test, it can be used for all distributions. </p>
+
+<ul>
+<li><p>Mann Kendall test yield another spatial object containing 6 bands. We will pay attention to these ones:</p>
+
+<ul>
+<li><p><strong>slope</strong> = Kendall&#39;s Sen slope. The median slope joining all pairs of observations expressed by quantity per unit of time. Negative values means negative trends and viceversa. 0 means that there is no trend.</p></li>
+<li><p><strong>p-value</strong> = Kendall&#39;s two-sided test statistic. The significance, which represents the threshold for which the hypothesis that there is no trend is accepted. The trend is statistically significant when the p-value is less than 0.05.</p></li>
+</ul></li>
+</ul>
+
+<div><pre class="line-numbers"><code class="language-r">mk &lt;- raster.kendall(r8, method=&quot;none&quot;)
+
+plot(mk)</code></pre></div>
+
+<p><strong>(16)</strong> Mask out non-significant trends. Cell trend values with a p-value higher then 0.05 will be identified and masked out.</p>
+
+<div><pre class="line-numbers"><code class="language-r"># Reclass cells with slope values lower then 0.05 (TRUE) and the rest (FALSE)
+signif&lt;-mk$`p-value`&lt;0.05
+
+plot(signif)
+
+plot(!signif) 
+
+# New raster object containing original slope values
+mk_slope&lt;-mk$slope
+
+# Assign NA value to all cells with p-value higher than the threshold (cells with signif == FALSE)
+mk_slope[!signif]&lt;-NA
+
+plot(mk_slope)</code></pre></div>
+
+<p><strong>(17)</strong> Export the <u>slope</u> band to a raster <u>.tif</u> file.</p>
+
+<div><pre class="line-numbers"><code class="language-r">writeRaster(mk_slope,&#39;output_mk_slope_scale8_signif.tif&#39;,overwrite=T) # only significant slope values
+
+writeRaster(mk$slope,&#39;output_mk_slope_scale8.tif&#39;,overwrite=T) # all slope values</code></pre></div>
+
+<h3 id="toc_4">III. Browsing results using QGIS</h3>
+
+<p><strong>(18)</strong> Install required plugins.</p>
+
+<ul>
+<li><p>Install a plugin called <q><u>Temporal/Spectral Profile tool</u></q>. Menu <u>Plugins</u>-&gt;<u>Manage and install plugins</u>. </p></li>
+<li><p>Install a plugin called <q><u>HCMGIS</u></q>. Menu <u>Plugins</u>-&gt;<u>Manage and install plugins</u>. </p></li>
+</ul>
+
+<p><strong>(19)</strong> Add the following layers to an empty QGIS project:</p>
+
+<ul>
+<li><p><code>output_mk_slope_scale8_signif.tif</code>: Raster file containing only significant slope values (NDVI trend) per pixel.</p></li>
+<li><p><code>output_mk_slope_scale8.tif</code>: Raster file containing all slope values (NDVI trend) per pixel.</p></li>
+<li><p><code>input_ndvi_ts_scale8.tif</code>: This a multiband raster image that contains the NDVI time series created in GEE (yearly values from 2011 to 2020).</p></li>
+<li><p>Add a basemap. Menu <u>HCMGIS</u>-&gt;<u>Basemaps</u>-&gt;<u>Google Satellite Hybrid</u>.</p></li>
+<li><p>Display <code>output_mk_slope_scale8</code> using a <u>singleband pseudocolor</u> render type as shown below (<u>Double click</u>-&gt;<u>Symbology</u>): </p></li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/javimarlop/datasets/master/pictures/symbology_mk_slope_qgis.png" alt=""></p>
+
+<ul>
+<li>Copy the style of this layer (Right click on <code>output_mk_slope_scale8</code>-&gt;<u>Styles</u>-&gt;<u>Copy Style</u>) to the <code>output_mk_slope_scale8_signif.tif</code> layer (Right click-&gt;<u>Styles</u>-&gt;<u>Paste Style</u>).</li>
+<li>Finally, reorder the layers as follows in the Layers pane:
+
+<ul>
+<li><code>output_mk_slope_scale8_signif</code></li>
+<li><code>output_mk_slope_scale8</code></li>
+<li><code>Google Satellite Hybrid</code></li>
+<li><code>input_ndvi_ts_scale8</code></li>
+</ul></li>
+</ul>
+
+<p><strong>(20)</strong> Visualize the trends.</p>
+
+<ul>
+<li>We will build a nice graph showing the NDVI trend of any selected pixel. In order to do that, follow these steps within QGIS:
+
+<ul>
+<li>Make sure the <code>input_ndvi_ts_scale8</code> layer is activated and selected.</li>
+<li>Menu <u>Plugins</u>-&gt;<u>Profile Tool</u>-&gt;<u>Temporal/Spectral Profile</u></li>
+<li>Click on any pixel of the selected layer and you will see a graph showing its NDVI trend. See image below:</li>
+</ul></li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/javimarlop/datasets/master/pictures/profile_tool.png" alt="NDVI_profile"></p>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+<script type="text/javascript">
+Prism.languages.r={comment:/#.*/,string:/(['"])(?:\\?.)*?\1/,"percent-operator":{pattern:/%[^%\s]*%/,alias:"operator"},"boolean":/\b(?:TRUE|FALSE)\b/,ellipsis:/\.\.(?:\.|\d+)/,number:[/\b(?:NaN|Inf)\b/,/\b(?:0x[\dA-Fa-f]+(?:\.\d*)?|\d*\.?\d+)(?:[EePp][+-]?\d+)?[iL]?\b/],keyword:/\b(?:if|else|repeat|while|function|for|in|next|break|NULL|NA|NA_integer_|NA_real_|NA_complex_|NA_character_)\b/,operator:/->?>?|<(?:=|<?-)?|[>=!]=?|::?|&&?|\|\|?|[+*\/^$@~]/,punctuation:/[(){}\[\],;]/};
+</script>
+
+<script type="text/javascript">
+Prism.languages.clike={comment:[{pattern:/(^|[^\\])\/\*[\w\W]*?\*\//,lookbehind:!0},{pattern:/(^|[^\\:])\/\/.*/,lookbehind:!0}],string:{pattern:/(["'])(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,greedy:!0},"class-name":{pattern:/((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,lookbehind:!0,inside:{punctuation:/(\.|\\)/}},keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,"boolean":/\b(true|false)\b/,"function":/[a-z0-9_]+(?=\()/i,number:/\b-?(?:0x[\da-f]+|\d*\.?\d+(?:e[+-]?\d+)?)\b/i,operator:/--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,punctuation:/[{}[\];(),.:]/};
+</script>
+
+<script type="text/javascript">
+Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|var|void|while|with|yield)\b/,number:/\b-?(0x[\dA-Fa-f]+|0b[01]+|0o[0-7]+|\d*\.?\d+([Ee][+-]?\d+)?|NaN|Infinity)\b/,"function":/[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*(?=\()/i}),Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/(^|[^\/])\/(?!\/)(\[.+?]|\\.|[^\/\\\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})]))/,lookbehind:!0,greedy:!0}}),Prism.languages.insertBefore("javascript","class-name",{"template-string":{pattern:/`(?:\\\\|\\?[^\\])*?`/,greedy:!0,inside:{interpolation:{pattern:/\$\{[^}]+\}/,inside:{"interpolation-punctuation":{pattern:/^\$\{|\}$/,alias:"punctuation"},rest:Prism.languages.javascript}},string:/[\s\S]+/}}}),Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{script:{pattern:/(<script[\w\W]*?>)[\w\W]*?(?=<\/script>)/i,lookbehind:!0,inside:Prism.languages.javascript,alias:"language-javascript"}}),Prism.languages.js=Prism.languages.javascript;
+</script>
+
+<script type="text/javascript">
+!function(){"undefined"!=typeof self&&self.Prism&&self.document&&Prism.hooks.add("complete",function(e){if(e.code){var t=e.element.parentNode,s=/\s*\bline-numbers\b\s*/;if(t&&/pre/i.test(t.nodeName)&&(s.test(t.className)||s.test(e.element.className))&&!e.element.querySelector(".line-numbers-rows")){s.test(e.element.className)&&(e.element.className=e.element.className.replace(s,"")),s.test(t.className)||(t.className+=" line-numbers");var n,a=e.code.match(/\n(?!$)/g),l=a?a.length+1:1,m=new Array(l+1);m=m.join("<span></span>"),n=document.createElement("span"),n.className="line-numbers-rows",n.innerHTML=m,t.hasAttribute("data-start")&&(t.style.counterReset="linenumber "+(parseInt(t.getAttribute("data-start"),10)-1)),e.element.appendChild(n)}}})}();
+</script>
+
+
+</body>
+
+</html>
